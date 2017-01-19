@@ -52,8 +52,8 @@ class ChatArea extends React.Component {
             }
           < /ul>
           < form onSubmit={ this.addMessage.bind(this) } >
-          < input className="button" type="text" ref="msg" required / >
-          < button className="button" type="submit" > send message < /button>
+          < input className="input button" type="text" ref="msg" required / >
+          < button className="button btn" type="submit" > send message < /button>
           < /form>
         < /div>
       );

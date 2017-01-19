@@ -1,11 +1,38 @@
 .messages {
-  background-color: rgb(64, 88, 5);
+  background-color: white;
+  color:#000;
   height: 250px;
   padding: 20px;
   color: white;
+  border: 1px solid #007FFF;
   overflow-y: auto;
 }
 
 .App-intro {
   font-size: large;
+  font-weight: bold;
+  text-align: center;
+}
+
+.input{
+      width: 950px;
+
+}
+
+ .input:hover{
+  background-color:#3298FF}
+
+
+.button{
+  padding: 0px 1rem !important;
+  margin: 0px !important;
+}
+
+.btn{
+  width: 261px;
+  float: right;
+}
+
+li {
+    color: black;
 }

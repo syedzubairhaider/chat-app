@@ -5,6 +5,10 @@
   "devDependencies": {
     "react-scripts": "0.8.5"
   },
+  "engines": {
+    "node": "7.4.0",
+    "npm": "4.0.5"
+  },
   "dependencies": {
     "babel-plugin-transform-class-properties": "^6.19.0",
     "babel-plugin-transform-runtime": "^6.15.0",
@@ -24,5 +28,15 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
+  "main": "express.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://zubair_kwanso@bitbucket.org/zubair_kwanso/chat-bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/zubair_kwanso/chat-bot#readme"
 }
