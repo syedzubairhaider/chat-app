@@ -11,24 +11,24 @@ class ChatArea extends React.Component {
 
     componentDidUpdate(){
       let msg =this.refs.msg.value;
-        let element = this.refs.messages;
-        element.scrollTop = element.scrollHeight;
-        if (msg) {
-          fetch('http://localhost:3000/?msg='+msg)
-            .then((response) => response.json())
-            .then((responseJson) => {
-              let user = 'bot';
-              let id = Math.floor((Math.random() * 1000) + 1);
-              msg = "You said : " + responseJson.message;
-              this.setState({
-                  messages: this.state.messages.concat({ id, user, msg }),
-              });
-            })
-            .catch((error) => {
-              console.log(error);
-          });
-        }
-        this.refs.msg.value = '';
+      let element = this.refs.messages;
+      element.scrollTop = element.scrollHeight;
+      if (msg) {
+        fetch('http://localhost:3000/?msg='+msg)
+          .then((response) => response.json())
+          .then((responseJson) => {
+            let user = 'bot';
+            let id = Math.floor((Math.random() * 1000) + 1);
+            msg = "You said : " + responseJson.message;
+            this.setState({
+                messages: this.state.messages.concat({ id, user, msg }),
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+        });
+      }
+      this.refs.msg.value = '';
     }
 
     addMessage(event) {
@@ -44,16 +44,16 @@ class ChatArea extends React.Component {
     render() {
       let displayMessages = this.state.messages;
       return (
-        < div >
-          < ul className="messages" ref="messages" > {
+        < div className="flex-outer" >
+          < ul className="messages flex-outer" ref="messages" > {
               displayMessages.map((message) => {
                 return <Message message={ message } key={ message.id } />
               })
             }
           < /ul>
           < form onSubmit={ this.addMessage.bind(this) } >
-          < input type="text" ref="msg" required / >
-          < button type="submit" > send message < /button>
+          < input className="button" type="text" ref="msg" required / >
+          < button className="button" type="submit" > send message < /button>
           < /form>
         < /div>
       );
