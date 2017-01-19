@@ -11,6 +11,8 @@ class ChatArea extends React.Component {
 
     componentDidUpdate(){
       let msg =this.refs.msg.value;
+        let element = this.refs.messages;
+        element.scrollTop = element.scrollHeight;
         if (msg) {
           fetch('http://localhost:3000/?msg='+msg)
             .then((response) => response.json())
