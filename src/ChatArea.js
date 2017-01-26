@@ -14,8 +14,9 @@ class ChatArea extends React.Component {
       let element = this.refs.messages;
       element.scrollTop = element.scrollHeight;
       if (msg) {
-        var express = 'https://glacial-temple-85300.herokuapp.com/?msg='+msg;
-        // var express = 'http://localhost:3001/?msg='+msg;
+        var url1 = location.protocol + '//' + location.host;
+        var express = url1+'/msg/?msg='+msg;
+        console.log(express);
         fetch(express)
           .then((response) => response.json())
           .then((responseJson) => {

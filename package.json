@@ -3,7 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-scripts": "0.8.5"
+    "awesome-typescript-loader": "^3.0.0-beta.18",
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-react": "^6.22.0",
+    "css-loader": "^0.26.1",
+    "react-scripts": "0.8.5",
+    "source-map-loader": "^0.1.6",
+    "style-loader": "^0.13.1",
+    "typescript": "^2.1.5",
+    "webpack": "^1.14.0"
   },
   "engines": {
     "node": "7.4.0",
@@ -19,13 +28,16 @@
     "babel-register": "^6.18.0",
     "body-parser": "^1.16.0",
     "express": "^4.14.0",
+    "lodash": "^4.17.4",
     "morgan": "^1.7.0",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "webpack": "^1.14.0"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start-server": "node express.js",
+    "build": "webpack -p",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
