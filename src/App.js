@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <div className="container">
         <p className="App-intro">
-        Chat Bot
+        Chat Bot1
         </p>
         <ChatArea  />
       </div>
