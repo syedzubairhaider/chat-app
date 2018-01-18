@@ -17,7 +17,7 @@
   },
   "production": {
     "base_url": "https://react-chat-bot.herokuapp.com/",
-    "use_env_variable": "DATABASE_URL",
+    "DATABASE_URL": "postgres://srdewrgzvwkkpg:ca433bf41a4b08605e3ce0919245b09a2431df509fc648385ad22181e30c680d@ec2-54-235-73-241.compute-1.amazonaws.com:5432/d9vn9762dct99p",
     "dialect": "postgres",
     "dialectOptions": {
       "ssl": true
