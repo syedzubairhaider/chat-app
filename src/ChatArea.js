@@ -1,5 +1,6 @@
 import React from 'react';
 import Message from './Message'
+import Request from 'superagent';
 
 class ChatArea extends React.Component {
     constructor(props) {
@@ -16,7 +17,20 @@ class ChatArea extends React.Component {
       if (msg) {
         var url1 = location.protocol + '//' + location.host;
         var express = url1+'/msg/?msg='+msg;
-        console.log(express);
+        console.log('q : ',express);
+
+  Request.post("/api/todos")
+  .set('Content-Type', 'application/json')
+  .send({title: msg})
+  .end(function(error, response) {
+    console.log('todo',error, response)
+    if (error){
+      return false
+    } else {
+      return true
+    }
+  });
+
         fetch(express)
           .then((response) => response.json())
           .then((responseJson) => {

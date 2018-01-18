@@ -9,6 +9,7 @@
     "babel-preset-react": "^6.22.0",
     "css-loader": "^0.26.1",
     "react-scripts": "0.8.5",
+    "sequelize-cli": "^3.2.0",
     "source-map-loader": "^0.1.6",
     "style-loader": "^0.13.1",
     "typescript": "^2.1.5",
@@ -30,19 +31,23 @@
     "express": "^4.14.0",
     "lodash": "^4.17.4",
     "morgan": "^1.7.0",
+    "pg": "^7.4.1",
+    "pg-hstore": "^2.3.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "sequelize": "^4.31.2",
+    "superagent": "^3.8.2",
     "webpack": "^1.14.0"
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-server": "node express.js",
+    "start-server": "node server/app.js",
     "build": "webpack -p",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
-  "main": "express.js",
+  "main": "server/app.js",
   "repository": {
     "type": "git",
     "url": "git+https://zubair_kwanso@bitbucket.org/zubair_kwanso/chat-bot.git"
