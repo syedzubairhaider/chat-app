@@ -1,7 +1,4 @@
 const todosController = require('../controllers').todos;
-let async = require('async')
-
-    // require('../../../../server').io.sockets.emit('return progress '+siteId, '0%' )
 
 var appRouter = function(app) {
 var path = require('path');
@@ -13,13 +10,13 @@ app.use(function(req, res, next) {
 });
 
 app.get('/msg', function(req, res) {
-    console.log('req.query',req.query)
     msg=req.query.msg;
     session=req.query.session;
     let a = {}
     a.msg = msg
     a.session = session
-    require('../../server/app.js').io.sockets.emit(`chat `, msg,session )
+    console.log('req.query.uri',req.query.uri)
+    require('../../server/app.js').io.sockets.emit(`chat ${req.query.uri}`, msg,session )
     // res.send({"status": "success", "message": msg});
 });
   app.get('/api', (req, res) => res.status(200).send({

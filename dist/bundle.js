@@ -22198,23 +22198,15 @@
 	  _createClass(ChatArea, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      // console.log('will')
 	      var self = this;
 	      var session = Math.floor(Math.random() * 1000 + 1);
 	      self.setState({ session: session });
 	      var socket = io();
-	      socket.on('chat ', function (msg, user) {
-	        // console.log('socket data',msg)
-	        var arr = self.state.messages;
-	        var n = arr.length;
-	        var t = arr[n - 1];
-	        console.log('t1', session, user, msg);
+	      socket.on('chat ' + window.location.href.split('/').pop(), function (msg, user) {
 	        if (user == session) {
 	          return 0;
 	        }
-	        // let user = t.user;
 	        var id = Math.floor(Math.random() * 1000 + 1);
-	        // msg = "You said : " + responseJson.message;
 	        self.setState({
 	          messages: self.state.messages.concat({ id: id, user: user, msg: msg })
 	        });
@@ -22228,7 +22220,7 @@
 	      element.scrollTop = element.scrollHeight;
 	      if (msg) {
 	        var url1 = location.protocol + '//' + location.host;
-	        var express = url1 + '/msg/?msg=' + msg + '&session=' + this.state.session;
+	        var express = url1 + '/msg/?msg=' + msg + '&session=' + this.state.session + '&uri=' + window.location.href.split('/').pop();
 	        console.log('q : ', express);
 
 	        _superagent2.default.post("/api/todos").set('Content-Type', 'application/json').send({ title: msg }).end(function (error, response) {
@@ -22245,14 +22237,7 @@
 
 	        fetch(express).then(function (response) {
 	          return response.json();
-	        }).then(function (responseJson) {
-	          var user = 'bot';
-	          var id = Math.floor(Math.random() * 1000 + 1);
-	          msg = "You said : " + responseJson.message;
-	          // this.setState({
-	          //     messages: this.state.messages.concat({ id, user, msg }),
-	          // });
-	        }).catch(function (error) {
+	        }).then(function (responseJson) {}).catch(function (error) {
 	          console.log(error);
 	        });
 	      }

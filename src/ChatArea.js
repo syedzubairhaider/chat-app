@@ -11,25 +11,16 @@ class ChatArea extends React.Component {
     }
 
  componentWillMount() {
-      // console.log('will')
       let self = this
       let session = Math.floor((Math.random() * 1000) + 1);
       self.setState({session:session})
       var socket = io()
-      socket.on('chat ', (msg,user) => {
-        // console.log('socket data',msg)
-            let arr = self.state.messages
-            let n = arr.length
-            let t = arr[n-1]
-            console.log('t1',session,user,msg)
+      socket.on(`chat ${window.location.href.split('/').pop()}`, (msg,user) => {
             if (user==session) {return 0}
-            // let user = t.user;
             let id = Math.floor((Math.random() * 1000) + 1);
-            // msg = "You said : " + responseJson.message;
             self.setState({
                 messages: self.state.messages.concat({ id, user, msg }),
             });
-
       });
 }
     componentDidUpdate(){
@@ -38,7 +29,7 @@ class ChatArea extends React.Component {
       element.scrollTop = element.scrollHeight;
       if (msg) {
         var url1 = location.protocol + '//' + location.host;
-        var express = `${url1}/msg/?msg=${msg}&session=${this.state.session}`;
+        var express = `${url1}/msg/?msg=${msg}&session=${this.state.session}&uri=${window.location.href.split('/').pop()}`;
         console.log('q : ',express);
 
   Request.post("/api/todos")
@@ -59,12 +50,6 @@ class ChatArea extends React.Component {
         fetch(express)
           .then((response) => response.json())
           .then((responseJson) => {
-            let user = 'bot';
-            let id = Math.floor((Math.random() * 1000) + 1);
-            msg = "You said : " + responseJson.message;
-            // this.setState({
-            //     messages: this.state.messages.concat({ id, user, msg }),
-            // });
           })
           .catch((error) => {
             console.log(error);
