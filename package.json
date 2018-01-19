@@ -20,6 +20,7 @@
     "npm": "4.0.5"
   },
   "dependencies": {
+    "async": "^2.6.0",
     "babel-plugin-transform-class-properties": "^6.19.0",
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-polyfill": "^6.20.0",
@@ -36,6 +37,7 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "sequelize": "^4.31.2",
+    "socket.io": "^2.0.4",
     "superagent": "^3.8.2",
     "webpack": "^1.14.0"
   },

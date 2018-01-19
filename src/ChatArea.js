@@ -10,23 +10,48 @@ class ChatArea extends React.Component {
         }
     }
 
+ componentWillMount() {
+      // console.log('will')
+      let self = this
+      let session = Math.floor((Math.random() * 1000) + 1);
+      self.setState({session:session})
+      var socket = io()
+      socket.on('chat ', (msg,user) => {
+        // console.log('socket data',msg)
+            let arr = self.state.messages
+            let n = arr.length
+            let t = arr[n-1]
+            console.log('t1',session,user,msg)
+            if (user==session) {return 0}
+            // let user = t.user;
+            let id = Math.floor((Math.random() * 1000) + 1);
+            // msg = "You said : " + responseJson.message;
+            self.setState({
+                messages: self.state.messages.concat({ id, user, msg }),
+            });
+
+      });
+}
     componentDidUpdate(){
       let msg =this.refs.msg.value;
       let element = this.refs.messages;
       element.scrollTop = element.scrollHeight;
       if (msg) {
         var url1 = location.protocol + '//' + location.host;
-        var express = url1+'/msg/?msg='+msg;
+        var express = `${url1}/msg/?msg=${msg}&session=${this.state.session}`;
         console.log('q : ',express);
 
   Request.post("/api/todos")
   .set('Content-Type', 'application/json')
   .send({title: msg})
   .end(function(error, response) {
-    console.log('todo',error, response)
     if (error){
+    console.log('todo',error,response)
+
       return false
     } else {
+    console.log('todo ', response.text)
+
       return true
     }
   });
@@ -37,9 +62,9 @@ class ChatArea extends React.Component {
             let user = 'bot';
             let id = Math.floor((Math.random() * 1000) + 1);
             msg = "You said : " + responseJson.message;
-            this.setState({
-                messages: this.state.messages.concat({ id, user, msg }),
-            });
+            // this.setState({
+            //     messages: this.state.messages.concat({ id, user, msg }),
+            // });
           })
           .catch((error) => {
             console.log(error);
@@ -51,13 +76,12 @@ class ChatArea extends React.Component {
     addMessage(event) {
         event.preventDefault();
         let msg = this.refs.msg.value;
-        let user = 'me';
+        let user = this.state.session;
         let id = Math.floor((Math.random() * 1000) + 1);
         this.setState({
             messages: this.state.messages.concat({ id, user, msg })
         });
     }
-
     render() {
       let displayMessages = this.state.messages;
       return (
