@@ -21549,7 +21549,7 @@
 	        _react2.default.createElement(
 	          'p',
 	          { className: 'App-intro' },
-	          'Chat Bot'
+	          'Chat'
 	        ),
 	        _react2.default.createElement(_ChatArea2.default, null)
 	      );
