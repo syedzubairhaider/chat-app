@@ -22258,7 +22258,6 @@
 	    key: 'render',
 	    value: function render() {
 	      var displayMessages = this.state.messages;
-	      var sess = this.state.session;
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'flex-outer' },
@@ -22267,7 +22266,7 @@
 	          { className: 'messages flex-outer', ref: 'messages' },
 	          ' ',
 	          displayMessages.map(function (message) {
-	            return _react2.default.createElement(_Message2.default, { sess: sess, message: message, key: message.id });
+	            return _react2.default.createElement(_Message2.default, { message: message, key: message.id });
 	          })
 	        ),
 	        _react2.default.createElement(
@@ -22310,7 +22309,7 @@
 	      message = _ref.message;
 	  return _react2.default.createElement(
 	    "li",
-	    { style: { color: message.user == sess ? "black" : "blue" }, className: "message" },
+	    { style: { color: "#" + message.user }, className: "message" },
 	    " ",
 	    message.user,
 	    " : ",
