@@ -69,11 +69,12 @@ class ChatArea extends React.Component {
     }
     render() {
       let displayMessages = this.state.messages;
+      let sess = this.state.session
       return (
         < div className="flex-outer" >
           < ul className="messages flex-outer" ref="messages" > {
               displayMessages.map((message) => {
-                return <Message message={ message } key={ message.id } />
+                return <Message sess={sess} message={ message } key={ message.id } />
               })
             }
           < /ul>
