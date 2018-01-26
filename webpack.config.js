@@ -2,15 +2,15 @@
 var webpack = require('webpack');
 var {resolve} = require('path');
 
-var BUILD_DIR = resolve(__dirname, 'dist/');
+var BUILD_DIR = resolve(__dirname, '/');
 var APP_DIR = resolve(__dirname, 'src/');
 
 var config = {
-  entry: ['babel-polyfill', 'react-hot-loader/patch','webpack/hot/only-dev-server',APP_DIR + '/index.js'],
+  devtools: 'eval-source-map',
+  entry: ['babel-polyfill','webpack-hot-middleware/client', 'react-hot-loader/patch','webpack/hot/only-dev-server',APP_DIR + '/index.js'],
   output: {
-    path: BUILD_DIR,
     filename: 'bundle.js',
-    publicPath:'/'
+    path: BUILD_DIR,
   },
   module: {
     loaders: [
@@ -34,6 +34,8 @@ var config = {
     ]
   },
   plugins: [
+    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ]

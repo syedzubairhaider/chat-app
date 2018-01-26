@@ -1,10 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {render} from 'react-dom';
 import App from './App';
 import { AppContainer } from 'react-hot-loader'
 
-const render = Component => {
-  ReactDOM.render(
+const Render = Component => {
+  render(
     <AppContainer>
       <Component />
     </AppContainer>,
@@ -12,7 +12,7 @@ const render = Component => {
   )
 }
 
-render(App)
+Render(App)
 
 // Webpack Hot Module Replacement API
 if (module.hot) {
