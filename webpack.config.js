@@ -2,7 +2,7 @@
 var webpack = require('webpack');
 var {resolve} = require('path');
 
-var BUILD_DIR = resolve(__dirname, '/');
+var BUILD_DIR = resolve(__dirname, 'dist/');
 var APP_DIR = resolve(__dirname, 'src/');
 
 var config = {
