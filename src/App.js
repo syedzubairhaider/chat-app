@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <div className="container">
         <p className="App-intro">
-        Chat
+        Yo Chat
         </p>
         <ChatArea  />
       </div>

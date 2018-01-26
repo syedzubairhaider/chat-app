@@ -48,8 +48,7 @@
   },
   "scripts": {
     "start": "./node_modules/.bin/nodemon server/app.js",
-    "build": "./node_modules/.bin/webpack --config webpack.config.js -p",
-    "postinstall": "./node_modules/.bin/webpack --config webpack.config.js -p",
+    "build": "webpack -p",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
