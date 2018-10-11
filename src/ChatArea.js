@@ -36,7 +36,7 @@ class ChatArea extends React.Component {
   componentDidMount() {
     let session = localStorage.getItem("session");
     if (!session) {
-      session = Math.floor(Math.random() * 1000 + 1);
+      session = Math.floor(Math.random() * 1000);
       localStorage.setItem("session", session);
     }
     this.setState({ session });
@@ -59,7 +59,6 @@ class ChatArea extends React.Component {
         .set("Content-Type", "application/json")
         .send({ title, session: this.state.session, uri })
         .end((error, response) => {
-          console.log('error, response: ', error, response)
         });
     }
   }
@@ -75,18 +74,30 @@ class ChatArea extends React.Component {
         </Messages>
 
         <Formik
+          initialValues={{ msg: "" }}
           validate={values => {
-            let errors = {};
-            // REGEX
-            console.log("values", values);
-            // return errors;
+            let errors = {}
+            if (!values.msg) 
+              errors.msg = "A message is required";
+            this.setState({msg:values.msg})
+            return errors
           }}
-          render={() => (
+          render={({
+            touched,
+            errors,
+            values,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+          }) => (
             <form onSubmit={e => this.addMessage(e)}>
               <Input
                 value={this.state.msg}
-                onChange={e => this.setState({ msg: e.target.value })}
-                className="input button"
+                border={
+                  errors.msg && "1px solid red"
+                }
+                onChange={e => handleChange(e)}
+                name="msg"
                 type="text"
                 required
               />
