@@ -1,89 +1,79 @@
-import React from 'react';
+import React from 'react'
 import Message from './Message'
-import Request from 'superagent';
+import Request from 'superagent'
 
 class ChatArea extends React.Component {
     constructor(props) {
-        super();
+        super()
         this.state = {
-            messages: []
+            messages: [],
+            msg: ''
         }
     }
 
- componentWillMount() {
-      let self = this
-      let session = Math.floor((Math.random() * 1000) + 1);
-      self.setState({session:session})
-      var socket = io()
-      socket.on(`chat ${window.location.href.split('/').pop()}`, (msg,user) => {
-            if (user==session) {return 0}
-            let id = Math.floor((Math.random() * 1000) + 1);
-            self.setState({
-                messages: self.state.messages.concat({ id, user, msg }),
-            });
-      });
-}
-    componentDidUpdate(){
-      let msg =this.refs.msg.value;
-      let element = this.refs.messages;
-      element.scrollTop = element.scrollHeight;
-      if (msg) {
-        var url1 = location.protocol + '//' + location.host;
-        var express = `${url1}/msg/?msg=${msg}&session=${this.state.session}&uri=${window.location.href.split('/').pop()}`;
-        console.log('q : ',express);
-
-  Request.post("/api/todos")
-  .set('Content-Type', 'application/json')
-  .send({title: msg})
-  .end(function(error, response) {
-    if (error){
-    console.log('todo',error,response)
-
-      return false
-    } else {
-    console.log('todo ', response.text)
-
-      return true
-    }
-  });
-
-        fetch(express)
-          .then((response) => response.json())
-          .then((responseJson) => {
-          })
-          .catch((error) => {
-            console.log(error);
-        });
-      }
-      this.refs.msg.value = '';
+    componentDidMount() {
+        let session = Math.floor((Math.random() * 1000) + 1) // get session from browser
+        this.setState({session: session})
+        var socket = io()
+        socket.on(`chat ${window.location.href.split('/').pop()}`, (msg, user) => {
+            if (user == session) {
+                return false
+            }
+            let id = Math.floor((Math.random() * 1000) + 1)
+            this.setState({
+                messages: this
+                    .state
+                    .messages
+                    .concat({id, user, msg})
+            })
+        })
     }
 
     addMessage(event) {
-        event.preventDefault();
-        let msg = this.refs.msg.value;
-        let user = this.state.session;
-        let id = Math.floor((Math.random() * 1000) + 1);
+        event.preventDefault()
+        let msg = this.state.msg
+        let user = this.state.session
+        let id = Math.floor((Math.random() * 1000) + 1)
         this.setState({
-            messages: this.state.messages.concat({ id, user, msg })
-        });
+            msg: '',
+            messages: this
+                .state
+                .messages
+                .concat({id, user, msg})
+        })
+
+        if (msg) {
+
+            const uri = window.location.href.split('/').pop()
+
+            Request
+                .post("/api/todos")
+                .set('Content-Type', 'application/json')
+                .send({title: msg, session: this.state.session, uri})
+                .end((error, response) => {
+                    console.log('todo err', error, response)
+                })
+        }
     }
+
     render() {
-      let displayMessages = this.state.messages;
-      return (
-        < div className="flex-outer" >
-          < ul className="messages flex-outer" ref="messages" > {
-              displayMessages.map((message) => {
-                return <Message message={ message } key={ message.id } />
-              })
-            }
-          < /ul>
-          < form onSubmit={ this.addMessage.bind(this) } >
-          < input className="input button" type="text" ref="msg" required / >
-          < button className="button btn" type="submit" > send message < /button>
-          < /form>
-        < /div>
-      );
+        let displayMessages = this.state.messages
+        return ( 
+          <div> 
+            <ul className = "messages"> 
+              {
+                displayMessages.map((message) => {
+                    return <Message message={message} key={message.id}/>
+                })
+              } 
+            </ul>
+            <form onSubmit={ (e) => this.addMessage(e) }>
+              <input value={this.state.msg} onChange={(e)=>this.setState({msg:e.target.value})} className="input button" type="text" required /> 
+              <button className = "button btn" type = "submit" > Send Message </button>
+            </form> 
+          </div>
+        )
     }
 }
 
-export default ChatArea;
+export default ChatArea

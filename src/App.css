@@ -1,36 +1,33 @@
 .messages {
-  background-color: white;
-  color:#000;
-  height: 250px;
-  padding: 20px;
-  color: white;
-  border: 1px solid #007FFF;
-  overflow-y: auto;
+    background-color: white;
+    color: #000;
+    height: 250px;
+    padding: 20px;
+    color: white;
+    border: 1px solid #007FFF;
+    overflow-y: auto;
 }
 
 .App-intro {
-  font-size: large;
-  font-weight: bold;
-  text-align: center;
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
 }
 
-.input{
-      width: 950px;
-
+.input {
+    width: 950px;
+    height: 40px;
 }
 
- .input:hover{
-  background-color:#3298FF}
-
-
-.button{
-  padding: 0px 1rem !important;
-  margin: 0px !important;
+.button {
+    padding: 0 1rem !important;
+    margin: 0 !important;
+    height: 45px;
 }
 
-.btn{
-  width: 261px;
-  float: right;
+.btn {
+    width: 261px;
+    float: right;
 }
 
 li {
